@@ -20,6 +20,7 @@ docker run -t -i ubuntu /bin/bash
 * -i - Keep stdin open (so we can interact with it)
 * ubuntu - use the Ubuntu base image
 * /bin/bash - Run the bash shell
+* --name="your container name"
 
 #### See all containers       
 
@@ -27,10 +28,10 @@ docker run -t -i ubuntu /bin/bash
 sudo docker ps -a
 ```
 #### Remove containers/images 
-To remove a container: docker rm <Container ID>
-To remove all containers: docker rm $(docker ps -a -q)
-To remove images: docker rmi <Container ID>
-To remove all images: docker rmi $(docker ps -a -q)
+- To remove a container: `docker rm <Container ID>`   
+- To remove all containers: `docker rm $(docker ps -a -q)`   
+- To remove images: `docker rmi <Container ID>`
+- To remove all images: `docker rmi $(docker ps -a -q)`
 
 #### Make changes to the base image     
 
@@ -55,4 +56,8 @@ The Dockerfile provides a set of instructions for Docker to run on a container. 
 - The sort of rule of thumb in the Docker world is to have one Docker container running on your server for each process in your stack. This isn’t a hard rule, but it’s a good one for people who are just starting out.
 ![diagram]
 (https://s3.amazonaws.com/codementor_content/2015-Feb-week1/runningc.png)
+
+### Troubleshooting
+##### Docker container cannot connect to internet: Could not resolve 'archive.ubuntu.com'
+
 
