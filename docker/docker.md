@@ -1,6 +1,7 @@
 Sources: 
 - https://serversforhackers.com/getting-started-with-docker
 - https://www.codementor.io/docker/tutorial/what-is-docker-tutorial-andrew-baker-oreilly
+- https://robinwinslow.co.uk/2014/08/27/fix-docker-networking/
 
 ### VM vs. Container
 ![image vm vs container]
@@ -58,6 +59,34 @@ The Dockerfile provides a set of instructions for Docker to run on a container. 
 (https://s3.amazonaws.com/codementor_content/2015-Feb-week1/runningc.png)
 
 ### Troubleshooting
-##### Docker container cannot connect to internet: Could not resolve 'archive.ubuntu.com'
+##### Problem: Docker container cannot connect to internet: Could not resolve 'archive.ubuntu.com'
+Solution: Sometimes docker is unable to use the host OS's DNS resolver, resulting in a DNS resolve error within your Docker container. We can fix this by explicitly telling Docker to use Google's DNS public server (8.8.8.8).
+###### Step 1. Add to /etc/default/docker:   
+`DOCKER_OPTS="--dns 8.8.8.8 --dns 192.168.100.102"`.  
+###### Step 2. Find and explicitly add the network's DNS server as a backup as well:     
+*(Optional, used if your network blocks all public DNS)*  
+How: 
+1. From the host OS, check the address of the DNS server you're using locally with nm-tool, e.g.:
+```
+$ nm-tool
+...
+  IPv4 Settings:
+    Address:         192.168.100.154
+    Prefix:          21 (255.255.248.0)
+    Gateway:         192.168.100.101
+
+    DNS:             192.168.0.1  # This is my DNS server address
+...
+```
+2. Add your DNS server as a 2nd DNS server for Docker
+```
+# /etc/default/docker
+# ...
+# Use DOCKER_OPTS to modify the daemon startup options.
+DOCKER_OPTS="--dns 8.8.8.8 --dns 192.168.0.1"
+# Google's DNS first ^, and ours ^ second
+```
+###### Step 3. Restart Docker  
+`sudo service docker restart`
 
 
