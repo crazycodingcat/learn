@@ -1,15 +1,8 @@
-Sources: 
-- https://serversforhackers.com/getting-started-with-docker
-- https://www.codementor.io/docker/tutorial/what-is-docker-tutorial-andrew-baker-oreilly
-- https://robinwinslow.co.uk/2014/08/27/fix-docker-networking/
-
 ### VM vs. Container
-![image vm vs container]
-(https://s3.amazonaws.com/serversforhackers/difference.png)
+<img src="https://s3.amazonaws.com/serversforhackers/difference.png" width="500">
 
 ### Docker vocabulary
-![vocab]
-(https://s3.amazonaws.com/codementor_content/2015-Feb-week1/docker_vs_git.png)
+<img src="https://s3.amazonaws.com/codementor_content/2015-Feb-week1/docker_vs_git.png" width="400">
 
 ### Commands:
 #### Run a container    
@@ -51,12 +44,33 @@ docker commit <Container ID> <Name>:<Tag>
 
 ### Dockerfile
 The Dockerfile provides a set of instructions for Docker to run on a container. This lets us automate installing items - we could have used a Dockerfile to install git, curl, wget, etc.
+```
+FROM ubuntu:12.10
+
+# Install Python Setuptools
+RUN apt-get install -y python-setuptools
+
+# Install pip
+RUN easy_install pip
+
+# Add and install Python modules
+ADD requirements.txt /src/requirements.txt
+RUN cd /src; pip install -r requirements.txt
+
+# Bundle app source
+ADD . /src
+
+# Expose
+EXPOSE  5000
+
+# Run
+CMD ["python", "/src/application.py"]
+```
 
 ### Notes:
 - A Docker container only stays alive as long as there is an active process being run in it.
 - The sort of rule of thumb in the Docker world is to have one Docker container running on your server for each process in your stack. This isn’t a hard rule, but it’s a good one for people who are just starting out.
-![diagram]
-(https://s3.amazonaws.com/codementor_content/2015-Feb-week1/runningc.png)
+<img src="https://s3.amazonaws.com/codementor_content/2015-Feb-week1/runningc.png" width="500">
 
 ### Troubleshooting
 ##### Problem: Docker container cannot connect to internet: Could not resolve 'archive.ubuntu.com'
@@ -88,5 +102,10 @@ DOCKER_OPTS="--dns 8.8.8.8 --dns 192.168.0.1"
 ```
 ###### Step 3. Restart Docker  
 `sudo service docker restart`
+
+Sources: 
+- https://serversforhackers.com/getting-started-with-docker
+- https://www.codementor.io/docker/tutorial/what-is-docker-tutorial-andrew-baker-oreilly
+- https://robinwinslow.co.uk/2014/08/27/fix-docker-networking/
 
 
