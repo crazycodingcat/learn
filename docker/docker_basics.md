@@ -42,6 +42,28 @@ apt-get install -y git ack-grep vim curl wget tmux build-essential python-softwa
 docker commit <Container ID> <Name>:<Tag>
 ```
 
+#### Persist a container
+```
+docker export -o <CONTAINER ID> /home/export.tar
+docker export <CONTAINER ID> > /home/export.tar
+```
+#### Import it back
+```
+cat /home/export.tar | docker import - some-name:latest
+```
+
+#### Persist an image
+```
+docker save -o <IMAGE ID> /home/save.tar
+```
+#### Load the image
+```
+docker load -i /home/save.tar
+```
+
+#### 
+Note:  the exported version is slightly smaller. That is because it is *flattened*, which means it lost its history and meta-data. This means that you cannot do any rollback to a previous layer if you export-import it while you can still do this if you save-load the whole (complete) image (you can go back to a previous layer by using docker tag <LAYER ID> <IMAGE NAME>). 
+
 ### Dockerfile
 The Dockerfile provides a set of instructions for Docker to run on a container. This lets us automate installing items - we could have used a Dockerfile to install git, curl, wget, etc.
 ```
@@ -107,5 +129,6 @@ Sources:
 - https://serversforhackers.com/getting-started-with-docker
 - https://www.codementor.io/docker/tutorial/what-is-docker-tutorial-andrew-baker-oreilly
 - https://robinwinslow.co.uk/2014/08/27/fix-docker-networking/
+- http://tuhrig.de/difference-between-save-and-export-in-docker/
 
 
