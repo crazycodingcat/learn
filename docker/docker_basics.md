@@ -44,7 +44,7 @@ docker commit <Container ID> <Name>:<Tag>
 
 #### Persist a container
 ```
-docker export -o <CONTAINER ID> /home/export.tar
+docker export -o /home/export.tar <CONTAINER ID> 
 docker export <CONTAINER ID> > /home/export.tar
 ```
 #### Import it back
@@ -54,7 +54,8 @@ cat /home/export.tar | docker import - some-name:latest
 
 #### Persist an image
 ```
-docker save -o <IMAGE ID> /home/save.tar
+docker save -o /home/save.tar <IMAGE ID> 
+docker save <IMAGE ID> > /home/save.tar
 ```
 #### Load the image
 ```

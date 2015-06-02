@@ -111,6 +111,6 @@ D. As a best practice, use array syntax for CMD and ENTRYPOINT.
 
 
 ###### Sources:   
-http://blogs.aws.amazon.com/application-management/post/Tx1ZLAHMVBEDCOC/Dockerizing-a-Python-Web-App
-http://docs.docker.com/reference/builder
-http://blog.flux7.com/blogs/docker/docker-tutorial-series-part-3-automation-is-the-word-using-dockerfile
+- http://blogs.aws.amazon.com/application-management/post/Tx1ZLAHMVBEDCOC/Dockerizing-a-Python-Web-App
+- http://docs.docker.com/reference/builder  
+- http://blog.flux7.com/blogs/docker/docker-tutorial-series-part-3-automation-is-the-word-using-dockerfile
