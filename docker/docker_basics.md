@@ -61,9 +61,9 @@ docker save <IMAGE ID> > /home/save.tar
 ```
 docker load -i /home/save.tar
 ```
+The original name of the image is restored.
 
-#### 
-Note:  the exported version is slightly smaller. That is because it is *flattened*, which means it lost its history and meta-data. This means that you cannot do any rollback to a previous layer if you export-import it while you can still do this if you save-load the whole (complete) image (you can go back to a previous layer by using docker tag <LAYER ID> <IMAGE NAME>). 
+Note:  the exported version is slightly smaller. That is because it is *flattened*, which means it lost its history and meta-data. This means that you cannot do any rollback to a previous layer if you export-import it while you can still do this if you save-load the whole (complete) image (you can go back to a previous layer by using docker tag <LAYER ID> <IMAGE NAME>). **Note that the CMD specified in Dockerfile is also lost, so when you import a flattened image, you need to specify the command needed to run the image.** 
 
 ### Dockerfile
 The Dockerfile provides a set of instructions for Docker to run on a container. This lets us automate installing items - we could have used a Dockerfile to install git, curl, wget, etc.
